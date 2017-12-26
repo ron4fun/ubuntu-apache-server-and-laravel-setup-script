@@ -93,7 +93,10 @@ if __name__ == "__main__":
     commands.append("curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer")
 
     commands.append("sudo apt-get update")
-    commands.append("sudo apt-get install mcrypt php7.0-mcrypt sudo apt-get upgrade sudo apt-get install php-mbstring sudo apt-get install phpunit")
+    commands.append("sudo apt-get install mcrypt php7.0-mcrypt")
+    commands.append("sudo apt-get upgrade")
+    commands.append("sudo apt-get install php-mbstring")
+    commands.append("sudo apt-get install phpunit")
 
     # Start processing commands
     processCommand(commands)
