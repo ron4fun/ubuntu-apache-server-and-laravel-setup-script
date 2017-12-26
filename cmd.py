@@ -8,6 +8,10 @@ def subProcess(command):
 	if args[0] == "cd":
 		os.chdir(args[1])
 		return
+	elif args[0] == "curl":
+                print "[+] %s" % command
+		os.system(command)
+		return
 	
 	p = subprocess.Popen(args, stdout=subprocess.PIPE)
 	print "[+] %s" % p.communicate()[0]

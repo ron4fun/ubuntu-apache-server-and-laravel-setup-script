@@ -4,7 +4,9 @@ from cmd import processCommand, command_line_query
 
 # Validator functions
 def validate_db_name(answer):
-    if answer and answer != "root":
+    if not answer:
+        raise ValueError("You must enter some non-empty value.")
+    if answer != "root":
         return answer
     else:
         raise ValueError("You cannot use the value 'root'.")
@@ -14,8 +16,6 @@ def validate_db_password(answer):
         return answer
     else:
         raise ValueError("Password too samll.")
-
-
 
 
 if __name__ == "__main__":
