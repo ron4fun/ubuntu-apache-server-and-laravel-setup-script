@@ -15,15 +15,29 @@ Follow the interactive shell and complete the installations and configurations.
 sudo python LAMPInstaller.py
 ```
 
-## 2. Run db_config.py
+## 2. Set correct timezone
+```
+dpkg-reconfigure tzdata
+```
+
+## 3. Run db_config.py
 ```
 sudo python db_config.py
 ```
 
-## 3. Run laravelInstaller.py
+## 4. Secure your MySQL Server
+```
+mysql_secure_installation
+```
+
+## 5. Run laravelInstaller.py
 ```
 sudo python laravelInstaller.py
 ```
+
+
+
+
 
 ###License
 
