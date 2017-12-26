@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import shutil, os, sys, getopt, subprocess, shlex, re
+import os, re
 from cmd import processCommand, command_line_query
    
 # Validator

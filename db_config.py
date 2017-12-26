@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import shutil, os, sys, getopt, subprocess, shlex
 from cmd import processCommand, command_line_query
 
 # Validator functions
@@ -25,7 +24,7 @@ if __name__ == "__main__":
     password = command_line_query("Enter MySQL password", validate=validate_db_password)
 
 
-	# Finalize
+    # Finalize
     commands=[]
     commands.append("echo \"CREATE DATABASE %s\" | mysql -u root -p" % db_name)
 

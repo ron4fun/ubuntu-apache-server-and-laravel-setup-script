@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys
+import os, sys, shlex, subprocess
 
 # Handle commands
 def subProcess(command):
