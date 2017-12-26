@@ -132,40 +132,9 @@ if __name__ == "__main__":
     commands.append("sudo apt-get update")
     commands.append("sudo apt-get dist-upgrade -y")
     commands.append("sudo apt-get autoremove -y")
-    commands.append("sudo apt-get install -y build-essential python-software-properties python g++ make fail2ban curl git htop ntp ntpdate zip unzip nano")
+    commands.append("sudo apt-get install -y build-essential software-properties-common python g++ make fail2ban curl git htop ntp ntpdate zip unzip nano")
 	
     commands.append("sudo dpkg-reconfigure tzdata")
-
-    commands.append("sudo apt-get install apache2")
-    commands.append("sudo ufw app list")
-    commands.append("sudo ufw allow in \"Apache Full\"")
-    commands.append("sudo ufw allow in \"OpenSSH\"")
-    commands.append("sudo ufw enable")
-    commands.append("sudo ufw status verbose")
-
-    commands.append("sudo apache2ctl configtest")
-    commands.append("sudo systemctl restart apache2")
-
-    commands.append("sudo a2enmod rewrite")
-    commands.append("sudo systemctl restart apache2")
-
-    commands.append("sudo apt-get install mysql-server")
-    commands.append("sudo mysql_secure_installation")
-
-    commands.append("sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql")
-
-    commands.append("sudo systemctl restart apache2")
-    commands.append("sudo systemctl status apache2")
-
-    commands.append("sudo apt-get install php-cli")
-
-    commands.append("curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer")
-
-    commands.append("sudo apt-get update sudo apt-get install mcrypt php7.0-mcrypt sudo apt-get upgrade sudo apt-get install php-mbstring sudo apt-get install phpunit")
-
-    commands.append("sudo apt-get install mysql-server")
-    commands.append("sudo mysql_secure_installation")
- 
 
     # Apache config file
     filename = "/etc/apache2/apache2.conf" 
@@ -175,8 +144,10 @@ if __name__ == "__main__":
     print "[+] Configuring server name..."
 
     text = "ServerName %s" % ServerName
-    fileSearchReplace.SearchReplace(filename, "ServerName", text, True)
- 
+    if not fileSearchReplace.SearchReplace(filename, "ServerName", text, True):
+        with open(filename, 'a+') as outfile:
+            outfile.write("\n" + text)
+
 
     # Customizing dir.conf file
     filename = "/etc/apache2/mods-enabled/dir.conf" 
@@ -210,8 +181,45 @@ if __name__ == "__main__":
 </Directory>
         """
 
-        outfile.write(text)    
+        outfile.write(text)   
+ 
+    # Start processing commands
+    processCommand(commands)
 
+    commands=[]
+    commands.append("sudo apt-get install apache2")
+    commands.append("sudo ufw app list")
+    commands.append("sudo ufw allow in \"Apache Full\"")
+    commands.append("sudo ufw allow in \"OpenSSH\"")
+    commands.append("sudo ufw enable")
+    commands.append("sudo ufw status verbose")
+
+    commands.append("sudo apache2ctl configtest")
+    commands.append("sudo systemctl restart apache2")
+
+    commands.append("sudo a2enmod rewrite")
+    commands.append("sudo systemctl restart apache2")
+
+    # Start processing commands
+    processCommand(commands)
+    
+    commands=[]
+    commands.append("sudo apt-get install mysql-server")
+    commands.append("sudo mysql_secure_installation")
+
+    commands.append("sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql")
+
+    commands.append("sudo systemctl restart apache2")
+    commands.append("sudo systemctl status apache2")
+
+    commands.append("sudo apt-get install php-cli")
+
+    commands.append("curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer")
+
+    commands.append("sudo apt-get update sudo apt-get install mcrypt php7.0-mcrypt sudo apt-get upgrade sudo apt-get install php-mbstring sudo apt-get install phpunit")
+
+    commands.append("sudo apt-get install mysql-server")
+    commands.append("sudo mysql_secure_installation")
 
     # Start processing commands
     processCommand(commands)
