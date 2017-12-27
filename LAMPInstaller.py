@@ -10,10 +10,18 @@ if __name__ == "__main__":
     commands.append("sudo apt-get update")
     commands.append("sudo apt-get dist-upgrade -y")
     commands.append("sudo apt-get autoremove -y")
-    commands.append("sudo apt-get install -y build-essential software-properties-common python g++ make fail2ban curl git htop ntp ntpdate zip unzip nano")
-    
+    commands.append("sudo apt-get install -y build-essential software-properties-common python g++ make fail2ban curl git htop ntp ntpdate zip unzip nano") 
+ 
+    # Start processing commands
+    processCommand(commands)
 
-    # Apache config file
+    commands=[]
+    commands.append("sudo apt-get install apache2")
+    
+    # Start processing commands
+    processCommand(commands)
+
+     # Apache config file
     filename = "/etc/apache2/apache2.conf" 
 
     ServerName = command_line_query("Enter server_domain_or_IP", default="localhost")
@@ -58,18 +66,15 @@ if __name__ == "__main__":
 </Directory>
         """
 
-        outfile.write(text)   
- 
-    # Start processing commands
-    processCommand(commands)
+        outfile.write(text)
 
     commands=[]
-    commands.append("sudo apt-get install apache2")
     commands.append("sudo ufw app list")
     commands.append("sudo ufw allow in \"Apache Full\"")
     commands.append("sudo ufw allow in \"OpenSSH\"")
     commands.append("sudo ufw enable")
     commands.append("sudo ufw status verbose")
+    
 
     commands.append("sudo apache2ctl configtest")
     commands.append("sudo systemctl restart apache2")
