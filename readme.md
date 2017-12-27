@@ -1,4 +1,4 @@
-# Apache Server and Laravel setup for Ubuntu and Linux
+# Automate Ubuntu 16.04 Server and Laravel Application Setup
 
 **The setup scripts installs the following software:**
 
